@@ -1,0 +1,27 @@
+{
+  "Mac" : [
+    {
+      "name" : "SwiftyJSON",
+      "hash" : "395464b5392cadc7970f36a81d6014fa17090418ec6d9101ea72f9b1983d4005"
+    }
+  ],
+  "watchOS" : [
+    {
+      "name" : "SwiftyJSON",
+      "hash" : "e5c3943184a9ab5038ece9afc2a9450b9ca8970dbba4ee85a1a852cc6d2ca6d5"
+    }
+  ],
+  "tvOS" : [
+    {
+      "name" : "SwiftyJSON",
+      "hash" : "bdd8c115b5fbbcb3e39066e3cfbcde54e46560b0d46e5099b6f36457c4c67e1b"
+    }
+  ],
+  "commitish" : "4.2.0",
+  "iOS" : [
+    {
+      "name" : "SwiftyJSON",
+      "hash" : "ae2d1a2ae60ac999a8ed7cb452f618efc5e2fb16c3486d1bf06805813529d2ce"
+    }
+  ]
+}
