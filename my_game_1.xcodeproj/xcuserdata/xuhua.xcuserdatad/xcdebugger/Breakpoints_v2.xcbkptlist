@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "my_game_1/GameScene.swift"
-            timestampString = "568608186.004413"
+            timestampString = "568611143.574102"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "GameScene"
             landmarkType = "3">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "my_game_1/GameScene.swift"
-            timestampString = "568608186.004917"
+            timestampString = "568611143.57459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "374"
-            endingLineNumber = "374"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "touchesCancelled(_:with:)"
             landmarkType = "7">
          </BreakpointContent>

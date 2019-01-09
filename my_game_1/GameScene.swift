@@ -4,7 +4,7 @@ import SpriteKit
 import GameplayKit
 import SwiftyJSON
 
-let randomText = ["阿弥陀佛","佛","药师琉璃光如来","观世音菩萨"]
+let randomText = ["阿彌陀佛","佛","藥師琉璃光如來","觀世音菩薩"]
 //可以直接读自己写的在另外文件的class，不需要import，太好了
 let xu = XuGame()
 
@@ -31,9 +31,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     var shJson : JSON = []
     var fuxi = xu.calcGua(num: 3)
-    var yangGua : SKShapeNode!
-    var yinGua : SKShapeNode!
-    //var yinGua2 : SKShapeNode!
+ 
 
     var hasGone = false
     
@@ -41,6 +39,27 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
    
 //---------------------------------
     
+    
+    
+    
+    func pathDrawCircle() {
+        let path = CGMutablePath()
+        let path1 = UIBezierPath()
+        
+        path.addEllipse(in: CGRect(x: 0, y: 0, width: 200, height: 200))
+        //path.addArc(center: CGPoint(x: 0, y: 100), radius: 150, startAngle: 0, endAngle: 180, clockwise: true)
+        let drawpath = SKShapeNode()
+        path.move(to: CGPoint(x: 0, y: 0))
+        drawpath.path = path
+        drawpath.strokeColor = UIColor.black
+        self.addChild(drawpath)
+        
+        path1.addArc(withCenter: CGPoint(x: 0, y: 0), radius: 200, startAngle: 0, endAngle: 90, clockwise: true)
+        let move = SKAction.follow(path1.cgPath, speed: 1000)
+        drawpath.run(move)
+      
+        
+    }
     
     
     //按照名字找到一个方子
@@ -72,10 +91,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
      //-------main----------------------------------------------------------------
     override func didMove(to view: SKView) {
+        pathDrawCircle()
         
         shJson = xu.readJson(jsonFile: "SH_ty2.json")
         
-        xu.drawNGua(point: CGPoint(x: -300, y: 0),scene: self)
+        xu.drawNGua(point: CGPoint(x: -300, y: -300),scene: self)
         
         self.physicsWorld.contactDelegate = self
         
