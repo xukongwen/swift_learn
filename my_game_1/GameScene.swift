@@ -28,12 +28,23 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var text1 : SKLabelNode!
     var text2 : SKLabelNode!
     var text_random : SKLabelNode!
+    var cam1 : SKCameraNode!
     
     var shJson : JSON = []
     var fuxi = xu.calcGua(num: 3)
  
 
     var hasGone = false
+    
+    var playerNode:SKNode {
+        return self.childNode(withName: "playerNode")!
+    }
+    
+    var playerCamera: SKCameraNode {
+        return self.playerNode.childNode(withName: "cam1") as! SKCameraNode
+    }
+    
+    
     
  
    
@@ -47,7 +58,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         let path1 = UIBezierPath()
         
         path.addEllipse(in: CGRect(x: 0, y: 0, width: 200, height: 200))
-        //path.addArc(center: CGPoint(x: 0, y: 100), radius: 150, startAngle: 0, endAngle: 180, clockwise: true)
+       
         let drawpath = SKShapeNode()
         path.move(to: CGPoint(x: 0, y: 0))
         drawpath.path = path
@@ -91,7 +102,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
      //-------main----------------------------------------------------------------
     override func didMove(to view: SKView) {
+        
+        self.camera = playerCamera //这个很重要！必须要设定场景的camera为哪个cam！
         pathDrawCircle()
+        drawGird()
         
         shJson = xu.readJson(jsonFile: "SH_ty2.json")
         
@@ -110,6 +124,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
       
         redbox = (childNode(withName: "redbox") as! SKSpriteNode)
         redbox.texture = man_white
+        
        
         redbox.physicsBody?.categoryBitMask = 2
    
@@ -122,6 +137,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         text_random = (childNode(withName: "random") as! SKLabelNode)
 
         originalRedboxPos = redbox.position
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchFrom(_:)))
+        
+        self.view?.addGestureRecognizer(pinchGesture)
+        print(pinchGesture)
 
         
         self.lastUpdateTime = 0
@@ -130,16 +150,65 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
    
    
-    //------------xu's func------------------------------------------------
-    
     func changeText(){
        text_random.text = randomText[xu.random_Custom(min: 0, max: 3)]
-        //text_random.position = brain.position
+     
         
+    }
+    
+    func drawGird() {
+        let boxWidth = 100
+        
+        for j in 0...5 {
+            for i in 0...5 {
+                let box = SKShapeNode.init(rect: CGRect(x: i*boxWidth - 300, y: j*boxWidth, width: boxWidth, height: boxWidth))
+                box.strokeColor = UIColor.black
+                box.fillColor = UIColor.white
+                box.zPosition = -10
+                self.addChild(box)
+            }
+        }
+        
+       
     }
 
     
     //--------------手指交互------------
+    
+ 
+    //这个是手指放大和移动
+    @objc func handlePinchFrom(_ sender: UIPinchGestureRecognizer) {
+        if sender.numberOfTouches == 2 {
+            let locationInView = sender.location(in: self.view)
+            let location = self.convertPoint(fromView: locationInView)
+            if sender.state == .changed {
+                let deltaScale = (sender.scale - 1.0)*2
+                let convertedScale = sender.scale - deltaScale
+                let newScale = self.playerCamera.xScale*convertedScale
+                self.playerCamera.setScale(newScale)
+                
+                let locationAfterScale = self.convertPoint(fromView: locationInView)
+                let locationDelta = pointSubtract(location, locationAfterScale)
+                let newPoint = pointAdd(self.playerCamera.position, locationDelta)
+                
+                self.playerCamera.position = newPoint
+                sender.scale = 1.0
+            }
+        }
+    }
+    
+    func pointSubtract( _ a: CGPoint, _ b: CGPoint) -> CGPoint {
+        let xD = a.x - b.x
+        let yD = a.y - b.y
+        return CGPoint(x: xD, y: yD)
+    }
+    
+    func pointAdd( _ a: CGPoint, _ b: CGPoint) -> CGPoint {
+        let xD = a.x + b.x
+        let yD = a.y + b.y
+        return CGPoint(x: xD, y: yD)
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -147,12 +216,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         if !hasGone{
             //self.deleteLastLine()
+           
         
             if let touch = touches.first{
                 let touchLocation = touch.location(in: self)
                 let touchWhere = nodes(at: touchLocation)
+                //print(touchLocation)
                 
-//                 startPoint = touch.location(in: self)
+//                startPoint = touch.location(in: self)
 //                drawPath = SKShapeNode()
 //                drawPath.strokeColor = UIColor.white
 //                drawPath.lineWidth = 2
@@ -187,6 +258,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             if let touch = touches.first{
                 let touchLocation = touch.location(in: self)
                 let touchWhere = nodes(at: touchLocation)
+                
+                //这里是移动地图
+                let previousLocation = touch.previousLocation(in: self)
+                let deltaLocaiton = self.pointSubtract(touchLocation, previousLocation)
+                self.playerCamera.position = self.pointSubtract(self.playerCamera.position, deltaLocaiton)
                 
 //                plotLine(atPoint: startPoint!, toPoint: touch.location(in: self))
                 
