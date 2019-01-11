@@ -13,6 +13,8 @@
 		83649CA321E33EE2003177FA /* File.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 83649CA221E33EE2003177FA /* File.stringsdict */; };
 		83649CA821E60347003177FA /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 83649CA721E60347003177FA /* MyTileSet.sks */; };
 		83649CAA21E6C8B5003177FA /* t1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83649CA921E6C8B5003177FA /* t1.swift */; };
+		83649CAC21E82CD7003177FA /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83649CAB21E82CD7003177FA /* StartScene.swift */; };
+		83649CAF21E83072003177FA /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83649CAE21E83072003177FA /* StartViewController.swift */; };
 		8384A0C721DCBEC500BAA9B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384A0C621DCBEC500BAA9B6 /* AppDelegate.swift */; };
 		8384A0C921DCBEC500BAA9B6 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8384A0C821DCBEC500BAA9B6 /* GameScene.sks */; };
 		8384A0CB21DCBEC500BAA9B6 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8384A0CA21DCBEC500BAA9B6 /* Actions.sks */; };
@@ -48,6 +50,8 @@
 		83649CA421E33F6B003177FA /* learn.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = learn.md; sourceTree = "<group>"; };
 		83649CA721E60347003177FA /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		83649CA921E6C8B5003177FA /* t1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = t1.swift; sourceTree = "<group>"; };
+		83649CAB21E82CD7003177FA /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
+		83649CAE21E83072003177FA /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		8384A0C321DCBEC500BAA9B6 /* my_game_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my_game_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8384A0C621DCBEC500BAA9B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8384A0C821DCBEC500BAA9B6 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -91,6 +95,16 @@
 			path = core;
 			sourceTree = "<group>";
 		};
+		83649CAD21E82CE4003177FA /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8384A0C821DCBEC500BAA9B6 /* GameScene.sks */,
+				8384A0CC21DCBEC500BAA9B6 /* GameScene.swift */,
+				83649CAB21E82CD7003177FA /* StartScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 		8384A0BA21DCBEC500BAA9B6 = {
 			isa = PBXGroup;
 			children = (
@@ -111,15 +125,15 @@
 		8384A0C521DCBEC500BAA9B6 /* my_game_1 */ = {
 			isa = PBXGroup;
 			children = (
+				83649CAD21E82CE4003177FA /* Scenes */,
 				83649CA621E34294003177FA /* core */,
 				83649CA521E34280003177FA /* data */,
-				8384A0CC21DCBEC500BAA9B6 /* GameScene.swift */,
 				83649CA721E60347003177FA /* MyTileSet.sks */,
 				8384A0C621DCBEC500BAA9B6 /* AppDelegate.swift */,
-				8384A0C821DCBEC500BAA9B6 /* GameScene.sks */,
 				83649CA921E6C8B5003177FA /* t1.swift */,
 				8384A0CA21DCBEC500BAA9B6 /* Actions.sks */,
 				8384A0CE21DCBEC500BAA9B6 /* GameViewController.swift */,
+				83649CAE21E83072003177FA /* StartViewController.swift */,
 				8384A0D021DCBEC500BAA9B6 /* Main.storyboard */,
 				8384A0D321DCBEC600BAA9B6 /* Assets.xcassets */,
 				8384A0D521DCBEC600BAA9B6 /* LaunchScreen.storyboard */,
@@ -217,6 +231,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8384A0CD21DCBEC500BAA9B6 /* GameScene.swift in Sources */,
+				83649CAF21E83072003177FA /* StartViewController.swift in Sources */,
+				83649CAC21E82CD7003177FA /* StartScene.swift in Sources */,
 				83649CA121E300B4003177FA /* XuGameClass.swift in Sources */,
 				83649CAA21E6C8B5003177FA /* t1.swift in Sources */,
 				8384A0CF21DCBEC500BAA9B6 /* GameViewController.swift in Sources */,

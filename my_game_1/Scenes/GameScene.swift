@@ -232,6 +232,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 if !touchWhere.isEmpty{
                     for node in touchWhere{
                         if let sprite = node as? SKSpriteNode{
+                            print(sprite)
                             if sprite == redbox {
                                 
                                 redbox.position = touchLocation

@@ -8,3 +8,6 @@ GameViewController是游戏这个view的管理者
 
 
 
+SKSpriteNode 是可以接受光的
+skshapenode则不可以
+貌似SKSpriteNode是最广泛的，我画方块按钮应该用这个

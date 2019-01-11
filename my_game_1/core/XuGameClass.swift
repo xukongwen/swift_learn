@@ -172,3 +172,32 @@ class XuGame: SKScene {
     
     
 }
+
+
+class App {
+    
+    let appName : String!
+    let appScene : SKScene!
+    let appIcone : SKTexture!
+    
+    init(appName: String, appScene: SKScene, appIcone: SKTexture) {
+        self.appName = appName
+        self.appScene = appScene
+        self.appIcone = appIcone
+        //self.appSprite.name = appScene
+    }
+    
+    func buildSP(scene: SKScene) {
+        let appSprite = SKSpriteNode.init(texture: appIcone, size: CGSize(width: 70, height: 70))
+        appSprite.position = CGPoint(x: 100, y: 600)
+        scene.addChild(appSprite)
+        
+        let appNameDraw = SKLabelNode(text: appName)
+        appNameDraw.color = UIColor.white
+        appNameDraw.position.x = appSprite.position.x
+        appNameDraw.position.y = appSprite.position.y - 55
+        appNameDraw.fontSize = 17
+        scene.addChild(appNameDraw)
+    }
+    
+}

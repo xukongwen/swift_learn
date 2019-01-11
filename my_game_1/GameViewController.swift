@@ -16,6 +16,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         
+        
 
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
@@ -33,6 +34,8 @@ class GameViewController: UIViewController {
                 
                 // Present the scene
                 if let view = self.view as! SKView? {
+                    print(UIScreen.main.bounds.size)
+                    
                     view.presentScene(sceneNode)
                     
                     view.ignoresSiblingOrder = true
