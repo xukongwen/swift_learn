@@ -18,7 +18,13 @@ class XuGame: SKScene {
     var drawPath: SKShapeNode!
     var lineArry: [SKShapeNode] = []
     var startPoint: CGPoint?
+    var playerCamera = SKCameraNode()
     
+
+    
+    func initClass(cam: SKCameraNode){
+        playerCamera = cam
+    }
  
     
     //------------------------func区------------------------------------------------------------
@@ -99,8 +105,8 @@ class XuGame: SKScene {
     //根据输入画任意多的卦
     func drawNGua( point: CGPoint, scene: SKScene) {
         
-        let count : Int = calcGua(num: 3).count
-        let onegua : [[Int]] = calcGua(num: 3)
+        let count : Int = calcGua(num: 6).count
+        let onegua : [[Int]] = calcGua(num: 6)
         var newx : CGFloat = point.x
 
         for c in 0...count-1 {
@@ -168,6 +174,53 @@ class XuGame: SKScene {
         
     }
     
+    func pinandPan(touch: Set<UITouch>, cam: SKCameraNode) {
+        
+        
+        if let t = touch.first{
+            let touchLocation = t.location(in: self)
+            //let touchWhere = nodes(at: touchLocation)
+            
+            let previousLocation = t.previousLocation(in: self)
+            let deltaLocaiton = self.pointSubtract(touchLocation, previousLocation)
+            playerCamera.position = self.pointSubtract(playerCamera.position, deltaLocaiton)
+            //print("touch")
+        }
+    }
+    
+    @objc func handlePinchFrom(_ sender: UIPinchGestureRecognizer) {
+        
+        if sender.numberOfTouches == 2 {
+            print("2hand")
+            let locationInView = sender.location(in: self.view)
+            let location = self.convertPoint(fromView: locationInView)
+            if sender.state == .changed {
+                let deltaScale = (sender.scale - 1.0)*2
+                let convertedScale = sender.scale - deltaScale
+                let newScale = playerCamera.xScale*convertedScale
+                playerCamera.setScale(newScale)
+                
+                let locationAfterScale = self.convertPoint(fromView: locationInView)
+                let locationDelta = pointSubtract(location, locationAfterScale)
+                let newPoint = pointAdd(playerCamera.position, locationDelta)
+                
+                playerCamera.position = newPoint
+                sender.scale = 1.0
+            }
+        }
+    }
+    
+    func pointSubtract( _ a: CGPoint, _ b: CGPoint) -> CGPoint {
+        let xD = a.x - b.x
+        let yD = a.y - b.y
+        return CGPoint(x: xD, y: yD)
+    }
+    
+    func pointAdd( _ a: CGPoint, _ b: CGPoint) -> CGPoint {
+        let xD = a.x + b.x
+        let yD = a.y + b.y
+        return CGPoint(x: xD, y: yD)
+    }
     
     
     
@@ -184,13 +237,13 @@ class App {
         self.appName = appName
         self.appScene = appScene
         self.appIcone = appIcone
-        //self.appSprite.name = appScene
     }
     
-    func buildSP(scene: SKScene) {
+    func buildSP(scene: SKScene, appPositon: CGPoint) {
         let appSprite = SKSpriteNode.init(texture: appIcone, size: CGSize(width: 70, height: 70))
-        appSprite.position = CGPoint(x: 100, y: 600)
+        appSprite.position = appPositon
         scene.addChild(appSprite)
+        appSprite.name = appName
         
         let appNameDraw = SKLabelNode(text: appName)
         appNameDraw.color = UIColor.white
@@ -199,5 +252,52 @@ class App {
         appNameDraw.fontSize = 17
         scene.addChild(appNameDraw)
     }
+    
+    
+}
+
+class AppButton: SKNode {
+    var appName : String!
+    var imageNamed: String!
+    var appScene: SKScene!
+    var appButton: SKSpriteNode!
+    var buttonMove = false
+    var mainScene : SKScene!
+    var placeAt : CGPoint!
+    var appLable : SKLabelNode!
+    
+    init(appName: String, imageNamed: String, appScene: SKScene, mainScene: SKScene, placeAt: CGPoint){
+        
+        self.appName = appName
+        self.imageNamed = imageNamed
+        self.appScene = appScene
+        self.mainScene = mainScene
+        self.placeAt = placeAt
+        appButton = SKSpriteNode(imageNamed: imageNamed)//在这里创建button
+        appButton.position = placeAt
+        appButton.size = CGSize(width: 70, height: 70)
+        mainScene.addChild(appButton)
+        
+        appLable = SKLabelNode(text: appName)
+        appLable.color = UIColor.white
+        appLable.position.x = appButton.position.x
+        appLable.position.y = appButton.position.y - 55
+        appLable.fontSize = 17
+        mainScene.addChild(appLable)
+        
+        
+        
+        
+        
+        super.init()//这个要在最后面
+        isUserInteractionEnabled = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+ 
     
 }

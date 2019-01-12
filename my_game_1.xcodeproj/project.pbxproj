@@ -23,6 +23,8 @@
 		8384A0D221DCBEC500BAA9B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8384A0D021DCBEC500BAA9B6 /* Main.storyboard */; };
 		8384A0D421DCBEC600BAA9B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8384A0D321DCBEC600BAA9B6 /* Assets.xcassets */; };
 		8384A0D721DCBEC600BAA9B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8384A0D521DCBEC600BAA9B6 /* LaunchScreen.storyboard */; };
+		838F256F21E970E3003ADC9B /* Test1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838F256E21E970E3003ADC9B /* Test1.swift */; };
+		838F257121E991F4003ADC9B /* Test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838F257021E991F4003ADC9B /* Test2.swift */; };
 		83AF943F21DF3615001DB350 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AF943E21DF3615001DB350 /* SwiftyJSON.framework */; };
 		83AF944021DF361E001DB350 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AF943E21DF3615001DB350 /* SwiftyJSON.framework */; };
 		83AF944121DF361E001DB350 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83AF943E21DF3615001DB350 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -62,6 +64,8 @@
 		8384A0D321DCBEC600BAA9B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8384A0D621DCBEC600BAA9B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8384A0D821DCBEC600BAA9B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		838F256E21E970E3003ADC9B /* Test1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1.swift; sourceTree = "<group>"; };
+		838F257021E991F4003ADC9B /* Test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
 		83AF943E21DF3615001DB350 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +105,8 @@
 				8384A0C821DCBEC500BAA9B6 /* GameScene.sks */,
 				8384A0CC21DCBEC500BAA9B6 /* GameScene.swift */,
 				83649CAB21E82CD7003177FA /* StartScene.swift */,
+				838F257021E991F4003ADC9B /* Test2.swift */,
+				838F256E21E970E3003ADC9B /* Test1.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -233,10 +239,12 @@
 				8384A0CD21DCBEC500BAA9B6 /* GameScene.swift in Sources */,
 				83649CAF21E83072003177FA /* StartViewController.swift in Sources */,
 				83649CAC21E82CD7003177FA /* StartScene.swift in Sources */,
+				838F257121E991F4003ADC9B /* Test2.swift in Sources */,
 				83649CA121E300B4003177FA /* XuGameClass.swift in Sources */,
 				83649CAA21E6C8B5003177FA /* t1.swift in Sources */,
 				8384A0CF21DCBEC500BAA9B6 /* GameViewController.swift in Sources */,
 				8384A0C721DCBEC500BAA9B6 /* AppDelegate.swift in Sources */,
+				838F256F21E970E3003ADC9B /* Test1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

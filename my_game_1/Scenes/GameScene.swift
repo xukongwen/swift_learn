@@ -109,7 +109,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         shJson = xu.readJson(jsonFile: "SH_ty2.json")
         
-        xu.drawNGua(point: CGPoint(x: -300, y: -300),scene: self)
+        //xu.drawNGua(point: CGPoint(x: -300, y: -300),scene: self,count: 6)
         
         self.physicsWorld.contactDelegate = self
         
