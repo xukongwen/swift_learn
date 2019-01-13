@@ -116,7 +116,7 @@ class XuGame: SKScene {
     
     }
     
-    //随机一个范围的整数
+    //随机一个范围的整数,但是4.2有这个功能了
     func random_Custom(min: Int, max: Int) -> Int {
         let y = arc4random() % UInt32(max) + UInt32(min)
         return Int(y)

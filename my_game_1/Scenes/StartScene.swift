@@ -15,9 +15,13 @@ class StartScene: SKScene {
     var app2 : App!
     
     var handMoiving = false
-    
-    var app3 : AppButton!
     var touchPoint : CGPoint!
+    
+    //================button=========
+    var app3 : AppButton!
+    var appPlanet : AppButton!
+    var appDrawLine : AppButton!
+    
     
     
     //===================================主程序运行区=================================================
@@ -32,30 +36,15 @@ class StartScene: SKScene {
         playerCamera.position = CGPoint(x: 0, y: 0)
         self.camera = playerCamera
         
-        
-//        let tempscene = SKScene(fileNamed: "GameScene")!
-//        let temTexture = SKTexture(imageNamed: "appIcon")
-//
-//        app1 = App(appName: "第一个实验", appScene: tempscene, appIcone: temTexture)
-//
-//        app1.buildSP(scene: self, appPositon: CGPoint(x: 100, y: 600))
-//
-//        let tempscene1 = Test2()
-//
-//        app2 = App(appName: "第二", appScene: tempscene1, appIcone: temTexture)
-//        app2.buildSP(scene: self, appPositon: CGPoint(x: 200, y: 600))
-        
         app3 = AppButton(appName: "game3", imageNamed: "appIcon", appScene: Test1(), mainScene: self, placeAt: CGPoint(x: 0, y: 0))
-        
+        appPlanet = AppButton(appName: "planet", imageNamed: "planetIcon", appScene: Test2(), mainScene: self, placeAt: CGPoint(x: 100, y: 0))
+        appDrawLine = AppButton(appName: "grid", imageNamed: "appIcon", appScene: EndlessGrid(), mainScene: self, placeAt: CGPoint(x: 200, y: 0))
         
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchFrom(_:)))
         
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        
         self.view?.addGestureRecognizer(pinchGesture)
-//        self.view?.addGestureRecognizer(tap)
-        
+
         let tapSingle=UITapGestureRecognizer(target:self,action:#selector(tapSingleDid))
         tapSingle.numberOfTapsRequired = 1
         tapSingle.numberOfTouchesRequired = 1
@@ -66,11 +55,15 @@ class StartScene: SKScene {
     
     //这里是让无论如何拖动都可以准确按键打开程序
     @objc func tapSingleDid(){
-        //print("单击了")
-        //handMoiving = false
+       
         if app3.appButton.contains(touchPoint) {
-            print("run")
             self.view?.presentScene(app3.appScene)
+        }
+        if appPlanet.appButton.contains(touchPoint){
+            self.view?.presentScene(appPlanet.appScene)
+        }
+        if appDrawLine.appButton.contains(touchPoint){
+            self.view?.presentScene(appDrawLine.appScene)
         }
     }
     
@@ -93,10 +86,11 @@ class StartScene: SKScene {
         
     }
     
+    //双指缩放
     @objc func handlePinchFrom(_ sender: UIPinchGestureRecognizer) {
         
         if sender.numberOfTouches == 2 {
-            //print("2hand")
+           
             let locationInView = sender.location(in: self.view)
             let location = self.convertPoint(fromView: locationInView)
             if sender.state == .changed {

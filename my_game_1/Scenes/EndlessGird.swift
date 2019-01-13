@@ -1,13 +1,16 @@
 
+
 import Foundation
 import SpriteKit
 import GameplayKit
 
-let Xu = XuGame()
-
-class Test1: SKScene {
+class EndlessGrid: SKScene {
     
     var playerCamera: SKCameraNode!
+    var drawPath : SKShapeNode!
+    var girdLine : SKShapeNode!
+    var girdLineArry : [CGPath] = []
+    var girdArry : [SKShapeNode] = []
     
     
     override func didMove(to view: SKView) {
@@ -17,12 +20,11 @@ class Test1: SKScene {
         self.backgroundColor = UIColor.white
         
         playerCamera = SKCameraNode()
-        
-        
+        playerCamera.position = CGPoint(x: 0, y: 0)
         self.camera = playerCamera
         
         
-        Xu.drawNGua(point: CGPoint(x: 10, y: 300), scene: self)
+        
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchFrom(_:)))
         
@@ -33,18 +35,50 @@ class Test1: SKScene {
         swipe.edges = UIRectEdge.left //从左边缘开始滑动
         self.view?.addGestureRecognizer(swipe)
         
+        //========================================================================================
+        
+        drawGrid()
+        
+        for l in girdArry {
+            self.addChild(l)
+            print(l)
+        }
+        
+    }
+    
+    func drawGrid() {
+        
+        for i in 0...5 {
+            plotLine(atPoint: CGPoint(x: i*100, y: 0), toPoint: CGPoint(x: i*100, y: 500))
+            plotLine(atPoint: CGPoint(x: 0, y: i*100), toPoint: CGPoint(x: 500, y: i*100))
+            
+        }
+    }
+    
+    func plotLine(atPoint start: CGPoint, toPoint end: CGPoint) {
+        drawPath = SKShapeNode()
+        let path = CGMutablePath()
+        
+        path.move(to: start)
+        path.addLine(to: end)
+        drawPath.path = path
+        drawPath.strokeColor = UIColor.black
+        drawPath.lineWidth = 1
+        girdArry.append(drawPath)
+        // girdLineArry.append(path)
         
     }
     
     @objc func swipe(_ recognizer:UIScreenEdgePanGestureRecognizer){
-    
+        
         self.view?.presentScene(StartScene())
     }
     
     @objc func handlePinchFrom(_ sender: UIPinchGestureRecognizer) {
+        var zoomout = true
         
         if sender.numberOfTouches == 2 {
-            //print("2hand")
+            
             let locationInView = sender.location(in: self.view)
             let location = self.convertPoint(fromView: locationInView)
             if sender.state == .changed {
@@ -59,6 +93,27 @@ class Test1: SKScene {
                 
                 playerCamera.position = newPoint
                 sender.scale = 1.0
+                
+                //这里是把scene的坐标根据放大缩小转化成view的坐标，然后就可以根据这个view坐标的参数来实现grid的画线k显示和不显示的控制
+                let endPoint = convertPoint(toView: CGPoint(x: 100, y: 0))
+                let zeroPoint = convertPoint(toView: CGPoint(x: 0, y: 0))
+                let newViewPoint: CGFloat =  endPoint.x - zeroPoint.x
+                print(newViewPoint)
+                
+                //                if newViewPoint <= 100 {
+                //                    print(girdArry)
+                //                    self.removeChildren(in: girdArry)
+                //                    zoomout = false
+                //                }
+                //                if newViewPoint >= 100 {
+                //                    if zoomout == false{
+                //                        for l in girdArry {
+                //                            self.addChild(l)
+                //                        }
+                //
+                //                    }
+                //                }
+                
             }
         }
     }
@@ -74,10 +129,10 @@ class Test1: SKScene {
         let yD = a.y + b.y
         return CGPoint(x: xD, y: yD)
     }
-
-
-  
-   
+    
+    
+    
+    
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{

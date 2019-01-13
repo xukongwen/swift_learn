@@ -21,11 +21,11 @@ class StartViewController: UIViewController {
         let scene = StartScene()
         scene.size = CGSize(width: view.frame.width, height: view.frame.height)
         scene.scaleMode = .aspectFill
-        print(scene.size)
+        
         
         if let view = self.view as! SKView? {
             
-            //print("skyview:",view.frame)
+
             view.presentScene(scene)
             
             view.ignoresSiblingOrder = true
