@@ -11,6 +11,7 @@
 		834D478F21DF2755008EDBFA /* SH_ty2.json in Resources */ = {isa = PBXBuildFile; fileRef = 834D478E21DF2755008EDBFA /* SH_ty2.json */; };
 		8350A44821EAB7BC00B3DA5A /* PlanetMaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350A44721EAB7BC00B3DA5A /* PlanetMaking.swift */; };
 		8350A44A21EAC9F500B3DA5A /* EndlessGird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350A44921EAC9F500B3DA5A /* EndlessGird.swift */; };
+		8350A44C21EC0C3F00B3DA5A /* Fo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350A44B21EC0C3F00B3DA5A /* Fo.swift */; };
 		83649CA121E300B4003177FA /* XuGameClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83649CA021E300B4003177FA /* XuGameClass.swift */; };
 		83649CA321E33EE2003177FA /* File.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 83649CA221E33EE2003177FA /* File.stringsdict */; };
 		83649CA821E60347003177FA /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 83649CA721E60347003177FA /* MyTileSet.sks */; };
@@ -51,6 +52,7 @@
 		834D478E21DF2755008EDBFA /* SH_ty2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SH_ty2.json; sourceTree = "<group>"; };
 		8350A44721EAB7BC00B3DA5A /* PlanetMaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetMaking.swift; sourceTree = "<group>"; };
 		8350A44921EAC9F500B3DA5A /* EndlessGird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessGird.swift; sourceTree = "<group>"; };
+		8350A44B21EC0C3F00B3DA5A /* Fo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fo.swift; sourceTree = "<group>"; };
 		83649CA021E300B4003177FA /* XuGameClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XuGameClass.swift; sourceTree = "<group>"; };
 		83649CA221E33EE2003177FA /* File.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = File.stringsdict; sourceTree = "<group>"; };
 		83649CA421E33F6B003177FA /* learn.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = learn.md; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				8350A44721EAB7BC00B3DA5A /* PlanetMaking.swift */,
 				838F257021E991F4003ADC9B /* Planet1.swift */,
 				838F256E21E970E3003ADC9B /* Test1.swift */,
+				8350A44B21EC0C3F00B3DA5A /* Fo.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				83649CAF21E83072003177FA /* StartViewController.swift in Sources */,
 				83649CAC21E82CD7003177FA /* StartScene.swift in Sources */,
 				838F257121E991F4003ADC9B /* Planet1.swift in Sources */,
+				8350A44C21EC0C3F00B3DA5A /* Fo.swift in Sources */,
 				83649CA121E300B4003177FA /* XuGameClass.swift in Sources */,
 				8350A44A21EAC9F500B3DA5A /* EndlessGird.swift in Sources */,
 				83649CAA21E6C8B5003177FA /* t1.swift in Sources */,

@@ -8,9 +8,13 @@ class EndlessGrid: SKScene {
     
     var playerCamera: SKCameraNode!
     var drawPath : SKShapeNode!
+    var drawSmallPath : SKShapeNode!
     var girdLine : SKShapeNode!
     var girdLineArry : [CGPath] = []
     var girdArry : [SKShapeNode] = []
+    var gridSmallArry : [SKShapeNode] = []
+    var zoomout = true
+    var gridNumber: Int!
     
     
     override func didMove(to view: SKView) {
@@ -37,37 +41,76 @@ class EndlessGrid: SKScene {
         
         //========================================================================================
         
-        drawGrid()
+        drawGrid(startX: 0, startY: 0)
+        drawGrid(startX: -900, startY: 0)
+        drawGrid(startX: 0, startY: -900)
+        drawGrid(startX: -900, startY: -900)
+        drawGrid(startX: 900, startY: 900)
+        drawGrid(startX: -900, startY: 900)
+        drawGrid(startX: 0, startY: 900)
+        drawGrid(startX: 900, startY: 0)
+        drawGrid(startX: 900, startY: -900)
+        drawSmallGrid()
         
         for l in girdArry {
             self.addChild(l)
-            print(l)
+            //print(l)
         }
+        
+//        for l in gridSmallArry {
+//            self.addChild(l)
+//        }
         
     }
     
-    func drawGrid() {
-        
-        for i in 0...5 {
-            plotLine(atPoint: CGPoint(x: i*100, y: 0), toPoint: CGPoint(x: i*100, y: 500))
-            plotLine(atPoint: CGPoint(x: 0, y: i*100), toPoint: CGPoint(x: 500, y: i*100))
+    func drawGrid(startX: Int, startY: Int) {
+    
+        for i in 0...9 {
+            plotLine(atPoint: CGPoint(x: startX + i*100, y: startY), toPoint: CGPoint(x: startX + i*100, y: startY + 900),lineWidth: 3)
+            plotLine(atPoint: CGPoint(x: startX, y: startY + i*100), toPoint: CGPoint(x: startX + 900, y: startY + i*100),lineWidth: 3)
+            
             
         }
     }
     
-    func plotLine(atPoint start: CGPoint, toPoint end: CGPoint) {
+    func drawSmallGrid() {
+        for i in 0...36 {
+            plotLineSmall(atPoint: CGPoint(x: i*20, y: 0), toPoint: CGPoint(x: i*20, y: 900), lineWidth: 1)
+            plotLineSmall(atPoint: CGPoint(x: 0, y: i*20), toPoint: CGPoint(x: 900, y: i*20), lineWidth: 1)
+        }
+    }
+    
+    
+    
+    func plotLine(atPoint start: CGPoint, toPoint end: CGPoint, lineWidth: CGFloat) {
         drawPath = SKShapeNode()
         let path = CGMutablePath()
         
         path.move(to: start)
         path.addLine(to: end)
         drawPath.path = path
-        drawPath.strokeColor = UIColor.black
-        drawPath.lineWidth = 1
+        drawPath.strokeColor = UIColor.gray
+        drawPath.lineWidth = lineWidth
+        drawPath.alpha = 0.7
         girdArry.append(drawPath)
-        // girdLineArry.append(path)
         
     }
+    
+    func plotLineSmall(atPoint start: CGPoint, toPoint end: CGPoint, lineWidth: CGFloat) {
+        drawSmallPath = SKShapeNode()
+        let path = CGMutablePath()
+        
+        path.move(to: start)
+        path.addLine(to: end)
+        drawSmallPath.path = path
+        drawSmallPath.strokeColor = UIColor.gray
+        drawSmallPath.lineWidth = lineWidth
+        drawSmallPath.alpha = 0.7
+        gridSmallArry.append(drawSmallPath)
+        
+    }
+    
+    
     
     @objc func swipe(_ recognizer:UIScreenEdgePanGestureRecognizer){
         
@@ -75,7 +118,7 @@ class EndlessGrid: SKScene {
     }
     
     @objc func handlePinchFrom(_ sender: UIPinchGestureRecognizer) {
-        var zoomout = true
+        
         
         if sender.numberOfTouches == 2 {
             
@@ -97,22 +140,34 @@ class EndlessGrid: SKScene {
                 //这里是把scene的坐标根据放大缩小转化成view的坐标，然后就可以根据这个view坐标的参数来实现grid的画线k显示和不显示的控制
                 let endPoint = convertPoint(toView: CGPoint(x: 100, y: 0))
                 let zeroPoint = convertPoint(toView: CGPoint(x: 0, y: 0))
-                let newViewPoint: CGFloat =  endPoint.x - zeroPoint.x
+                let newViewPoint: CGFloat =  endPoint.x - zeroPoint.x //就是永远参考0-100换算过来的值
                 print(newViewPoint)
                 
-                //                if newViewPoint <= 100 {
-                //                    print(girdArry)
-                //                    self.removeChildren(in: girdArry)
-                //                    zoomout = false
-                //                }
-                //                if newViewPoint >= 100 {
-                //                    if zoomout == false{
-                //                        for l in girdArry {
-                //                            self.addChild(l)
-                //                        }
-                //
-                //                    }
-                //                }
+                if newViewPoint <= 45 {
+                    //print(girdArry)
+                    self.removeChildren(in: girdArry)
+                    zoomout = false
+                    
+                }
+                if newViewPoint >= 200 {
+                    self.removeChildren(in: girdArry)
+                    zoomout = false
+        
+                }
+                
+                if zoomout == false {
+                    if newViewPoint > 45 && newViewPoint < 200 {
+                        for l in girdArry {
+                            self.addChild(l)
+                            print("add")
+                            zoomout = true
+                        }
+                    }
+                }
+                
+    
+                
+                
                 
             }
         }

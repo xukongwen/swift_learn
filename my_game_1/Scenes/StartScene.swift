@@ -21,6 +21,7 @@ class StartScene: SKScene {
     var app3 : AppButton!
     var appPlanet : AppButton!
     var appDrawLine : AppButton!
+    var appFo : AppButton!
     
     
     
@@ -39,6 +40,8 @@ class StartScene: SKScene {
         app3 = AppButton(appName: "game3", imageNamed: "appIcon", appScene: Test1(), mainScene: self, placeAt: CGPoint(x: 0, y: 0))
         appPlanet = AppButton(appName: "planet", imageNamed: "planetIcon", appScene: Test2(), mainScene: self, placeAt: CGPoint(x: 100, y: 0))
         appDrawLine = AppButton(appName: "grid", imageNamed: "appIcon", appScene: EndlessGrid(), mainScene: self, placeAt: CGPoint(x: 200, y: 0))
+        
+        appFo = AppButton(appName: "佛", imageNamed: "佛", appScene: Fo(), mainScene: self, placeAt: CGPoint(x: 0, y: 100))
         
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchFrom(_:)))
@@ -64,6 +67,9 @@ class StartScene: SKScene {
         }
         if appDrawLine.appButton.contains(touchPoint){
             self.view?.presentScene(appDrawLine.appScene)
+        }
+        if appFo.appButton.contains(touchPoint){
+            self.view?.presentScene(appFo.appScene)
         }
     }
     
