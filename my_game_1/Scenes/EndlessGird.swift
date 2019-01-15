@@ -15,6 +15,13 @@ class EndlessGrid: SKScene {
     var gridSmallArry : [SKShapeNode] = []
     var zoomout = true
     var gridNumber: Int!
+    var box: SKSpriteNode!
+    var boxArry: [SKSpriteNode] = []
+    var moveDriction: CGFloat = 0
+    var touchPoint: CGPoint!
+    var textBox: SKShapeNode!
+    var touchNodes: [SKNode] = []
+    //var whenSeleted: SKSpriteNode!
     
     
     override func didMove(to view: SKView) {
@@ -39,6 +46,11 @@ class EndlessGrid: SKScene {
         swipe.edges = UIRectEdge.left //从左边缘开始滑动
         self.view?.addGestureRecognizer(swipe)
         
+        let tapSingle=UITapGestureRecognizer(target:self,action:#selector(tapSingleDid))
+        tapSingle.numberOfTapsRequired = 1
+        tapSingle.numberOfTouchesRequired = 1
+        self.view?.addGestureRecognizer(tapSingle)
+        
         //========================================================================================
         
         drawGrid(startX: 0, startY: 0)
@@ -61,6 +73,78 @@ class EndlessGrid: SKScene {
 //            self.addChild(l)
 //        }
         
+        
+        makeBoxeGrid(makex: -200, makey: -500)
+        
+        
+        
+    }
+    
+    func textBoxfun(){
+        let t = SKLabelNode.init(text: "hi")
+        textBox = SKShapeNode.init(rect: CGRect(x: -600, y: -600, width: 300, height: 200))
+        t.position.x = textBox.position.x + 150
+        t.position.y = textBox.position.y + 100
+        t.color = UIColor.white
+        textBox.fillColor = UIColor.red
+    }
+    
+    @objc func tapSingleDid(){
+        
+        //实验选择一个物体并且标注
+        for t in touchNodes {
+            if t.contains(touchPoint){
+                let path = CGMutablePath()
+                var selectedBox : [SKNode]=[]
+                
+                path.addRect(CGRect(x: t.position.x - t.frame.width/2, y: t.position.y - t.frame.height/2, width: t.frame.width, height: t.frame.height))
+                
+                let whenSeleted: SKShapeNode!
+                let followBox = SKShapeNode.init(rectOf: CGSize(width: 10, height: 10))
+                followBox.fillColor = UIColor.blue
+                whenSeleted = SKShapeNode()
+                whenSeleted.path = path
+                whenSeleted.strokeColor = UIColor.green
+                whenSeleted.glowWidth = 2
+                selectedBox.append(whenSeleted)
+                self.addChild(whenSeleted)
+                self.addChild(followBox)
+                let move = SKAction.follow(path, speed: 1000)
+            
+                followBox.run(move)
+                
+            }
+        }
+        
+        
+        for box in boxArry {
+            if box.contains(touchPoint) {
+                //print("box:",box)
+                box.color = UIColor.red
+            }
+        }
+    }
+    
+    func makeBoxeGrid(makex: CGFloat, makey: CGFloat){
+        
+        for j in 0...10 {
+            for i in 0...6 {
+                makeBox(makex: CGFloat(i*110)+makex, makey: CGFloat(j*110)+makey)
+            }
+        }
+        
+        
+        
+        
+        
+    }
+    
+    func makeBox(makex: CGFloat, makey: CGFloat) {
+        box = SKSpriteNode.init(color: UIColor.gray, size: CGSize(width: 100, height: 100))
+        box.position = CGPoint(x: makex, y: makey)
+        boxArry.append(box)
+        self.addChild(box)
+      
     }
     
     func drawGrid(startX: Int, startY: Int) {
@@ -91,7 +175,8 @@ class EndlessGrid: SKScene {
         drawPath.path = path
         drawPath.strokeColor = UIColor.gray
         drawPath.lineWidth = lineWidth
-        drawPath.alpha = 0.7
+        drawPath.alpha = 0.5
+        drawPath.zPosition = -2
         girdArry.append(drawPath)
         
     }
@@ -107,7 +192,7 @@ class EndlessGrid: SKScene {
         drawSmallPath.lineWidth = lineWidth
         drawSmallPath.alpha = 0.7
         gridSmallArry.append(drawSmallPath)
-        
+
     }
     
     
@@ -192,12 +277,30 @@ class EndlessGrid: SKScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{
             let touchLocation = touch.location(in: self)
-            let touchWhere = nodes(at: touchLocation)
+            touchNodes = nodes(at: touchLocation)
+            
+            touchPoint = touchLocation
             
             //这里是移动地图
             let previousLocation = touch.previousLocation(in: self)
             let deltaLocaiton = self.pointSubtract(touchLocation, previousLocation)
             self.playerCamera.position = self.pointSubtract(self.playerCamera.position, deltaLocaiton)
+            moveDriction = deltaLocaiton.y
+            //print("d:",deltaLocaiton)
         }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+//        if moveDriction > 20 {
+//            for box in boxArry {
+//                box.position.y -= 100
+//            }
+//
+//        }
+//        if moveDriction < -20 {
+//            for box in boxArry {
+//                box.position.y += 100
+//            }
+//        }
     }
 }

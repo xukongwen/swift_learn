@@ -22,6 +22,7 @@ class StartScene: SKScene {
     var appPlanet : AppButton!
     var appDrawLine : AppButton!
     var appFo : AppButton!
+    var appWorldMap1 : AppButton!
     
     
     
@@ -42,6 +43,7 @@ class StartScene: SKScene {
         appDrawLine = AppButton(appName: "grid", imageNamed: "appIcon", appScene: EndlessGrid(), mainScene: self, placeAt: CGPoint(x: 200, y: 0))
         
         appFo = AppButton(appName: "佛", imageNamed: "佛", appScene: Fo(), mainScene: self, placeAt: CGPoint(x: 0, y: 100))
+        appWorldMap1 = AppButton(appName: "world", imageNamed: "planetIcon", appScene: worldMapTest1(), mainScene: self, placeAt: CGPoint(x: 100, y: 100))
         
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchFrom(_:)))
@@ -70,6 +72,9 @@ class StartScene: SKScene {
         }
         if appFo.appButton.contains(touchPoint){
             self.view?.presentScene(appFo.appScene)
+        }
+        if appWorldMap1.appButton.contains(touchPoint){
+            self.view?.presentScene(appWorldMap1.appScene)
         }
     }
     
