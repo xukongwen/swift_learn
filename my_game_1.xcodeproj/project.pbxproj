@@ -102,6 +102,7 @@
 		83649CA621E34294003177FA /* core */ = {
 			isa = PBXGroup;
 			children = (
+				8350A44721EAB7BC00B3DA5A /* PlanetMaking.swift */,
 				83649CA021E300B4003177FA /* XuGameClass.swift */,
 			);
 			path = core;
@@ -114,7 +115,6 @@
 				8384A0CC21DCBEC500BAA9B6 /* GameScene.swift */,
 				83649CAB21E82CD7003177FA /* StartScene.swift */,
 				8350A44921EAC9F500B3DA5A /* EndlessGird.swift */,
-				8350A44721EAB7BC00B3DA5A /* PlanetMaking.swift */,
 				838F257021E991F4003ADC9B /* Planet1.swift */,
 				838F256E21E970E3003ADC9B /* Test1.swift */,
 				83CD9E4721EDCF8A00C92225 /* wordMapTest1.swift */,
